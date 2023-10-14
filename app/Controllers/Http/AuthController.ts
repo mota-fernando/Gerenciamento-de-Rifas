@@ -7,7 +7,7 @@ export default class AuthController {
   }
 
   public async store({ request, response, auth, session }: HttpContextContract) {
-    const data = request.only(['name', 'email', 'password', 'admin'])
+    const data = request.only(['name', 'surname', 'mobile', 'email', 'password', 'admin'])
     const users = await User.query()
 
     if (!this.validateStore(data, session, users)) {
@@ -52,6 +52,20 @@ export default class AuthController {
       this.registerError(errors, 'name', 'Nome precisa ter pelo menos 3 caracteres')
     } else if (data.name.length > 25) {
       this.registerError(errors, 'name', 'Nome precisa ter no máximo 25 caracteres')
+    }
+
+    if (!data.surname) {
+      this.registerError(errors, 'surname', 'Campo obrigatório')
+    } else if (data.surname.length < 3) {
+      this.registerError(errors, 'surname', 'Sobrenome precisa ter pelo menos 3 caracteres')
+    } else if (data.surname.length > 25) {
+      this.registerError(errors, 'surname', 'Sobrenome precisa ter no máximo 25 caracteres')
+    }
+
+    if (!data.mobile) {
+      this.registerError(errors, 'mobile', 'Campo obrigatório')
+    } else if (data.mobile.length === 8) {
+      this.registerError(errors, 'mobile', 'Telefone precisa ter no máximo 8 caracteres')
     }
 
     if (!data.email) {

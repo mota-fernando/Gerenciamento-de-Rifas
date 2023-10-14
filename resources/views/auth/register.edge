@@ -25,7 +25,43 @@
 							Este campo é obrigatório e precisa ter entre 3 a 25 caracteres
 						</div>
 					@endif
-					
+
+					@if(flashMessages.has('errors.surname'))
+						<div class="form-floating mb-1">
+							<input type="text" class="form-control is-invalid" name="surname" id="surname" placeholder="Sobrenome" autofocus value="{{flashMessages.get('surname') || '' }}">
+							<label for="surname">Sobrenome</label>
+							<div id="title" class="invalid-feedback">
+								{{flashMessages.get('errors.surname')}}
+							</div>
+						</div>
+					@else
+						<div class="form-floating mb-1">
+							<input type="text" class="form-control" name="surname" id="surname" placeholder="Sobrenome" autofocus value="{{flashMessages.get('surname') || '' }}">
+							<label for="surname">Sobrenome</label>
+						</div>
+						<div id="title" class="form-text">
+							Este campo é obrigatório e precisa ter entre 3 a 25 caracteres
+						</div>
+					@endif
+
+					@if(flashMessages.has('errors.mobile'))
+						<div class="form-floating mb-1">
+							<input type="text" class="form-control is-invalid" name="mobile" id="mobile" placeholder="Telefone com DD" autofocus value="{{flashMessages.get('mobile') || '' }}">
+							<label for="mobile">Telefone com DD</label>
+							<div id="title" class="invalid-feedback">
+								{{flashMessages.get('errors.mobile')}}
+							</div>
+						</div>
+					@else
+						<div class="form-floating mb-1">
+							<input type="text" class="form-control" name="mobile" id="mobile" placeholder="Telefone com DD" autofocus value="{{flashMessages.get('mobile') || '' }}">
+							<label for="mobile">Telefone com DD</label>
+						</div>
+						<div id="title" class="form-text">
+							Este campo é obrigatório e precisa ter entre 8 digitos
+						</div>
+					@endif
+				
 					@if(flashMessages.has('errors.email'))
 						<div class="form-floating mb-1">
 							<input type="email" class="form-control is-invalid" name="email" id="email" placeholder="nome@exemplo.com" value="{{flashMessages.get('email') || ''}}">
